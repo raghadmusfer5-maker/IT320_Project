@@ -10,78 +10,75 @@
 <body>
 
 <!-- HEADER -->
-<header class="main-header">
-    <h2>AlUla Pulses - Admin Panel</h2>
+<header class="main-header" id="header">
+
+    <div class="header-content">
+
+        <img src="images/logo.png" alt="Logo" class="logo">
+
+        <h2>AlUla Pulses - Admin Panel</h2>
+
+    </div>
+
 </header>
 
 
 <div class="container">
 
     <!-- Welcome -->
-    <section class="admin-welcome">
+    <section class="admin-welcome" id="welcome">
         <h1>Hello Admin 👋</h1>
         <p>Manage zone activity tags.</p>
     </section>
 
-
-    <!-- ZONES -->
-    <section class="zones-section">
+    <!-- ZONES SECTION START -->
+    <section class="zones-section" id="zones">
 
         <h2>Zones</h2>
 
-        <!-- ZONE 1 -->
-        <div class="zone-card">
+    <!-- ZONE 1 -->
+<div class="zone-card">
+    <h3>Hegra Historical City District</h3>
+    <button onclick="toggleDetails('zone1', this)">Show More</button>
 
-            <h3>Old Town</h3>
-            <button onclick="toggleDetails('zone1')">Show Details</button>
-
-            <div class="zone-details" id="zone1">
-
-                <div class="zone-header">
-                    <p>Historic tourist area.</p>
-                    <span id="tag-zone1" class="zone-tag no-data">No Data</span>
-                </div>
-
-                <div class="zone-actions">
-
-                    <!-- ADD -->
-                    <select id="add-zone1" onchange="addTag('zone1', this)">
-                        <option value="">Add Tag</option>
-                        <option>Busy</option>
-                        <option>Normal</option>
-                        <option>Calm</option>
-                    </select>
-
-                    <!-- EDIT -->
-                    <select id="edit-zone1" onchange="editTag('zone1', this)" disabled>
-                        <option value="">Edit Tag</option>
-                        <option>Busy</option>
-                        <option>Normal</option>
-                        <option>Calm</option>
-                    </select>
-
-                    <!-- DELETE -->
-                    <button onclick="deleteTag('zone1')" disabled id="delete-zone1">
-                        Delete Tag
-                    </button>
-
-                </div>
-
-            </div>
-
+    <div class="zone-details" id="zone1">
+        <div class="zone-header">
+            <p>A timeless city carved in stone—home to monumental Nabataean tombs.</p>
+            <span id="tag-zone1" class="zone-tag no-data">No Data</span>
         </div>
+
+        <div class="zone-actions">
+            <select id="add-zone1" onchange="addTag('zone1', this)">
+                <option value="">Add Tag</option>
+                <option>Busy</option>
+                <option>Normal</option>
+                <option>Calm</option>
+            </select>
+
+            <select id="edit-zone1" onchange="editTag('zone1', this)" disabled>
+                <option value="">Edit Tag</option>
+                <option>Busy</option>
+                <option>Normal</option>
+                <option>Calm</option>
+            </select>
+
+            <button onclick="deleteTag('zone1')" disabled id="delete-zone1">
+                Delete
+            </button>
+        </div>
+    </div>
+</div>
 
 
          <!-- ZONE 2 -->
         <div class="zone-card">
 
-            <h3>Old Town</h3>
-            <button onclick="toggleDetails('zone2')">Show Details</button>
-
+            <h3>Nabataean Horizon District</h3>
+            <button onclick="toggleDetails('zone2', this)">Show More</button>
             <div class="zone-details" id="zone2">
 
                 <div class="zone-header">
-                    <p>Historic tourist area.</p>
+                    <p>Where the desert stretches endlessly—an open horizon that once connected ancient trade routes and civilizations across Arabia.</p>
                     <span id="tag-zone2" class="zone-tag no-data">No Data</span>
                 </div>
 
@@ -117,13 +114,13 @@
          <!-- ZONE 3 -->
         <div class="zone-card">
 
-            <h3>Old Town</h3>
-            <button onclick="toggleDetails('zone3')">Show Details</button>
+            <h3>Jabal Ikmah District</h3>
+            <button onclick="toggleDetails('zone3', this)">Show More</button>
 
             <div class="zone-details" id="zone3">
 
                 <div class="zone-header">
-                    <p>Historic tourist area.</p>
+                    <p>An open-air library etched in stone—thousands of inscriptions preserving voices, languages, and stories from ancient times.</p>
                     <span id="tag-zone3" class="zone-tag no-data">No Data</span>
                 </div>
 
@@ -159,13 +156,13 @@
          <!-- ZONE 4 -->
         <div class="zone-card">
 
-            <h3>Old Town</h3>
-            <button onclick="toggleDetails('zone4')">Show Details</button>
+            <h3>Dadan District</h3>
+            <button onclick="toggleDetails('zone4', this)">Show More</button>
 
             <div class="zone-details" id="zone4">
 
                 <div class="zone-header">
-                    <p>Historic tourist area.</p>
+                    <p>The heart of ancient kingdoms—ruins of Dadan and Lihyan civilizations that once ruled this fertile valley.</p>
                     <span id="tag-zone4" class="zone-tag no-data">No Data</span>
                 </div>
 
@@ -201,13 +198,13 @@
          <!-- ZONE 5 -->
         <div class="zone-card">
 
-            <h3>Old Town</h3>
-            <button onclick="toggleDetails('zone5')">Show Details</button>
+            <h3>AlUla Old Town District</h3>
+            <button onclick="toggleDetails('zone5', this)">Show More</button>
 
             <div class="zone-details" id="zone5">
 
                 <div class="zone-header">
-                    <p>Historic tourist area.</p>
+                    <p>A living memory of the past—narrow mudbrick streets filled with heritage, culture, and the روح of old AlUla.</p>
                     <span id="tag-zone5" class="zone-tag no-data">No Data</span>
                 </div>
 
@@ -256,85 +253,94 @@
 
 <script>
 
-function toggleDetails(id){
 
-let section = document.getElementById(id);
 
-section.style.display =
-(section.style.display === "block") ? "none" : "block";
+function toggleDetails(id, btn){
+    let section = document.getElementById(id);
 
+    if(section.style.display === "block"){
+        section.style.display = "none";
+        btn.innerText = "Show More";
+    } else {
+        section.style.display = "block";
+        btn.innerText = "Show Less";
+    }
 }
-
 
 
 function addTag(id, select){
 
-if(select.value === "") return;
+    if(select.value === "") return;
 
-let tag = document.getElementById("tag-" + id);
+    let tag = document.getElementById("tag-" + id);
 
-updateTagStyle(tag, select.value);
+    tag.innerText = select.value;
+    updateTagStyle(tag, select.value);
 
-tag.innerText = select.value;
+    // disable add
+    select.disabled = true;
 
-/* disable add */
-select.disabled = true;
+    // enable edit + delete
+    document.getElementById("edit-" + id).disabled = false;
+    document.getElementById("delete-" + id).disabled = false;
 
-/* enable edit + delete */
-document.getElementById("edit-" + id).disabled = false;
-document.getElementById("delete-" + id).disabled = false;
-
+    // reset dropdown
+    select.value = "";
 }
-
 
 
 function editTag(id, select){
 
-if(select.value === "") return;
+    if(select.value === "") return;
 
-let tag = document.getElementById("tag-" + id);
+    let tag = document.getElementById("tag-" + id);
 
-updateTagStyle(tag, select.value);
+    tag.innerText = select.value;
+    updateTagStyle(tag, select.value);
 
-tag.innerText = select.value;
-
+    // reset dropdown
+    select.value = "";
 }
-
 
 
 function deleteTag(id){
 
-let tag = document.getElementById("tag-" + id);
+    let tag = document.getElementById("tag-" + id);
 
-tag.innerText = "No Data";
-tag.className = "zone-tag no-data";
+    tag.innerText = "No Data";
+    tag.className = "zone-tag no-data";
 
-/* enable add again */
-document.getElementById("add-" + id).disabled = false;
+    // enable add again
+    let add = document.getElementById("add-" + id);
+    add.disabled = false;
+    add.value = "";
 
-/* disable edit + delete */
-document.getElementById("edit-" + id).disabled = true;
-document.getElementById("delete-" + id).disabled = true;
+    // disable edit
+    let edit = document.getElementById("edit-" + id);
+    edit.disabled = true;
+    edit.value = "";
 
+    // disable delete (THIS IS THE KEY FIX)
+    let del = document.getElementById("delete-" + id);
+    del.disabled = true;
 }
-
 
 
 function updateTagStyle(tag, value){
 
-tag.className = "zone-tag";
+    tag.className = "zone-tag";
 
-if(value === "Busy"){
-tag.classList.add("busy");
-}
-else if(value === "Normal"){
-tag.classList.add("normal");
-}
-else if(value === "Calm"){
-tag.classList.add("calm");
+    if(value === "Busy"){
+        tag.classList.add("busy");
+    }
+    else if(value === "Normal"){
+        tag.classList.add("normal");
+    }
+    else if(value === "Calm"){
+        tag.classList.add("calm");
+    }
 }
 
-}
 
 </script>
 
