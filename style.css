@@ -7,7 +7,7 @@
 body{
     font-family: 'Georgia', serif;
     margin:0;
-    background: linear-gradient(to bottom, #f7f3ea, #e8d8b5);
+    background:  #f7f3ea;
 }
 
 /* ============================= */
@@ -43,31 +43,37 @@ body{
 
 .admin-welcome,
 .zones-section{
-    background: #f7f3ea; /* SAME as page */
+    /*background: #f7f3ea;  SAME as page */
     padding: 30px 35px;
     margin:20px;
     border-radius:12px;
 
     /* ✨ THIS IS THE KEY */
-    border: 1.5px solid #d6bfa7;
+   /* border: 1.5px solid #d6bfa7;*/
 
-    box-shadow:none; /* remove shadow for clean look */
+   
 }
 
 
 /* ============================= */
 /* ZONE CARD */
 /* ============================= */
+.allzones-card{
+    width: 100%; /* FULL WIDTH */
+    padding: 25px;
+    border-radius: 16px;
+
+    background: linear-gradient(to bottom, #f7f3ea, #f3e0c7);
+
+    /* ✨ add this for better presence */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
 
 .zone-card{
-    background:transparent; /* blend with section */
-    border-radius:12px;
-    padding:18px;
-    margin-top:15px;
-    border-left:4px solid #c69c6d;
-    transition:0.3s ease;
-    position:relative;
-     box-shadow:none;
+    width: 95%;
+    padding: 20px;
+    margin: 10px 0;  /* better spacing */
+    border-radius: 12px;
 }
 
 .zone-card:hover{
@@ -206,10 +212,12 @@ p{
 }
 
 .container{
-    max-width: 1100px;   /* controls width */
-    margin: auto;        /* centers it */
-    padding: 0 20px;     /* space from edges */
-}
+   
+    max-width: 1400px;  /* ← makes everything wider */
+    margin: auto;
+    padding: 0 30px;
+}    /* space from edges */
+
 
 .header-content{
     display:flex;
@@ -252,4 +260,21 @@ p{
 
 .zone-text button{
     width: fit-content;
+}
+
+.dashboard-layout{
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* LEFT (Hello Admin) */
+.admin-welcome{
+    width: 20%;
+    min-width: 220px; /* prevents it from getting too tiny */
+}
+
+/* RIGHT (Zones) */
+.zones-section{
+    width: 80%;
 }
