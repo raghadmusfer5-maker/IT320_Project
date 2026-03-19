@@ -223,9 +223,33 @@ p{
     height:150px;
     object-fit:contain;
 }
+.zoneimage-admin{
+   width: 80px;
+    height:80px;
+    object-fit:contain;
+}
 
 .main-header h2{
     background: linear-gradient(to right, #fff, #f3e0c7);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.zone-top{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.zone-text{
+    display: flex;
+    flex-direction: column;
+}
+
+.zone-text h3{
+    margin: 0;
+}
+
+.zone-text button{
+    width: fit-content;
 }
