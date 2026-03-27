@@ -3,10 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search </title>
+    <title>Search Zone</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+}
+
+.page-container {
+    width: 80%;
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    border: 2px solid #222;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.search-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-box input {
+    width: 60%;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #999;
+    border-radius: 6px;
+}
+
+.search-box button {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #222;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.search-box button:hover {
+    background-color: #444;
+}
+
+#message {
+    text-align: center;
+    font-weight: bold;
+    margin: 15px 0;
+    color: red;
+}
+
+#searchResult {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.result-name {
+    display: inline-block;
+    padding: 10px 16px;
+    background-color: #e9ecef;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.result-name:hover {
+    background-color: #dbe4ea;
+}
+
+.zone-card {
+    border: 2px solid #222;
+    padding: 25px;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+.zone-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.zone-header h2 {
+    margin: 0;
+}
+
+.tag {
+    padding: 8px 14px;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+#zoneDescription {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+}
+
+.image-container img {
+    width: 300px;
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #333;
+    border-radius: 8px;
+}
+
+.hidden {
+    display: none;
+}
+    </style>
 </head>
+
 <body>
-    
+
+    <div class="page-container">
+        <h1>Search for an AlUla Zone</h1>
+
+        <div class="search-box">
+            <input type="text" id="zoneInput" placeholder="Enter zone name">
+            <button id="searchBtn">Search</button>
+        </div>
+
+        <p id="message"></p>
+
+        <div id="searchResult"></div>
+
+        <div id="zoneDetails" class="zone-card hidden">
+            <div class="zone-header">
+                <h2 id="zoneName"></h2>
+                <span id="zoneTag" class="tag"></span>
+            </div>
+
+            <p id="zoneDescription"></p>
+
+            <div class="image-container">
+                <img id="zoneImage" src="" alt="Zone Image">
+            </div>
+        </div>
+    </div>
+<script>
+    const zones = [
+    {
+        name: "Hegra Historical City District",
+        tag: "normal",
+        description: "Hegra, also known as Madā͐ in Ṣāliḥ, is a premier UNESCO World Heritage Site in Saudi Arabia located in AlUla, renowned for its remarkably preserved Nabataean tombs and over 100 monumental graves from the 1st century AD. As the second city of the Nabataean civilization after Petra, it features intricate stone-cut architecture, ancient agricultural systems, and inscriptions within a dramatic desert landscape.",
+        image: "images/hegraPic1.png"
+    },
+    {
+        name: "Nabataean Horizon District",
+        tag: "calm",
+        description: "Situated between the ancient sites of Jabal Ikmah and the Hegra Historical City, this district is designed to highlight the artistic and architectural legacy of the Nabataean civilization, acting as a curtain-raiser to the main UNESCO site of Hegra. The district focuses on creating an immersive experience showcasing the lifestyle, art, and architecture of the Nabataeans, who settled the area over 2,000 years ago.",
+        image: "images/NabataeanPic1.jpg"
+    },
+    {
+        name: "Jabal Ikmah District",
+        tag: "busy",
+        description: "Jabal Ikmah is one of the most prominent historical sites in AlUla and is designated as one of the largest open-air libraries in the Arabian Peninsula. It includes hundreds of carved inscriptions and stone carvings along the mountain made in different eras and civilizations thousands of years ago.",
+        image: "images/JabalPic1.jpg"
+    },
+    {
+        name: "Dadan District",
+        tag: "normal",
+        description: "Dadan is a premier archaeological site in AlUla. One of the city’s most striking features is its rock-cut tombs, carved high into the red sandstone cliffs at about 50 meters above the desert floor — an enduring testament to the craftsmanship and ingenuity of the ancient builders. Numerous inscriptions, statues, and reliefs found in the area further illustrate the cultural, religious, and political life of the period.",
+        image: "images/DadanPic1.jpg"
+    },
+    {
+        name: "AlUla Old Town District",
+        tag: "busy",
+        description: "The Old Town of AlUla is more than a historic site, it is a living experience that takes visitors back to the feeling of past centuries. It opens a window into a time-honored way of life, inviting exploration through its alleys that have preserved their spirit despite the passage of time. It is a destination that inspires, enchants, and connects every visitor to the essence of AlUla.",
+        image: "images/AlulaOldTownPic1.jpg"
+    }
+];
+
+const zoneInput = document.getElementById("zoneInput");
+const searchBtn = document.getElementById("searchBtn");
+const message = document.getElementById("message");
+const searchResult = document.getElementById("searchResult");
+const zoneDetails = document.getElementById("zoneDetails");
+
+const zoneName = document.getElementById("zoneName");
+const zoneTag = document.getElementById("zoneTag");
+const zoneDescription = document.getElementById("zoneDescription");
+const zoneImage = document.getElementById("zoneImage");
+
+function getTagColor(tag) {
+    if (tag === "busy") {
+        return "red";
+    } else if (tag === "calm") {
+        return "lightblue";
+    } else if (tag === "normal") {
+        return "green";
+    }
+    return "gray";
+}
+
+function searchZone() {
+    const userInput = zoneInput.value.trim().toLowerCase();
+
+    message.textContent = "";
+    searchResult.innerHTML = "";
+    zoneDetails.classList.add("hidden");
+
+    if (userInput === "") {
+        message.textContent = "Please enter a zone name.";
+        return;
+    }
+
+    const foundZone = zones.find(zone => zone.name.toLowerCase() === userInput);
+
+    if (foundZone) {
+        const resultItem = document.createElement("div");
+        resultItem.classList.add("result-name");
+        resultItem.textContent = foundZone.name;
+
+        resultItem.addEventListener("click", function () {
+            displayZone(foundZone);
+        });
+
+        searchResult.appendChild(resultItem);
+    } else {
+        message.textContent = "Zone not found. Please try again.";
+    }
+}
+
+function displayZone(zone) {
+    zoneName.textContent = zone.name;
+    zoneTag.textContent = zone.tag;
+    zoneTag.style.backgroundColor = getTagColor(zone.tag);
+    zoneDescription.textContent = zone.description;
+    zoneImage.src = zone.image;
+    zoneImage.alt = zone.name;
+
+    zoneDetails.classList.remove("hidden");
+}
+
+searchBtn.addEventListener("click", searchZone);
+
+zoneInput.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+        searchZone();
+    }
+});
+</script>
 </body>
 </html>
