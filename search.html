@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Zone</title>
     <link rel="stylesheet" href="style.css">
+
     <style>
         body {
     margin: 0;
@@ -132,7 +133,6 @@ h1 {
 }
     </style>
 </head>
-
 <body>
 
     <div class="page-container">
@@ -144,8 +144,6 @@ h1 {
         </div>
 
         <p id="message"></p>
-
-        <div id="searchResult"></div>
 
         <div id="zoneDetails" class="zone-card hidden">
             <div class="zone-header">
@@ -160,8 +158,8 @@ h1 {
             </div>
         </div>
     </div>
-<script>
-    const zones = [
+
+    <script>const zones = [
     {
         name: "Hegra Historical City District",
         tag: "normal",
@@ -197,7 +195,6 @@ h1 {
 const zoneInput = document.getElementById("zoneInput");
 const searchBtn = document.getElementById("searchBtn");
 const message = document.getElementById("message");
-const searchResult = document.getElementById("searchResult");
 const zoneDetails = document.getElementById("zoneDetails");
 
 const zoneName = document.getElementById("zoneName");
@@ -212,15 +209,15 @@ function getTagColor(tag) {
         return "lightblue";
     } else if (tag === "normal") {
         return "green";
+    } else {
+        return "gray";
     }
-    return "gray";
 }
 
 function searchZone() {
     const userInput = zoneInput.value.trim().toLowerCase();
 
     message.textContent = "";
-    searchResult.innerHTML = "";
     zoneDetails.classList.add("hidden");
 
     if (userInput === "") {
@@ -231,38 +228,25 @@ function searchZone() {
     const foundZone = zones.find(zone => zone.name.toLowerCase() === userInput);
 
     if (foundZone) {
-        const resultItem = document.createElement("div");
-        resultItem.classList.add("result-name");
-        resultItem.textContent = foundZone.name;
+        zoneName.textContent = foundZone.name;
+        zoneTag.textContent = foundZone.tag;
+        zoneTag.style.backgroundColor = getTagColor(foundZone.tag);
+        zoneDescription.textContent = foundZone.description;
+        zoneImage.src = foundZone.image;
+        zoneImage.alt = foundZone.name;
 
-        resultItem.addEventListener("click", function () {
-            displayZone(foundZone);
-        });
-
-        searchResult.appendChild(resultItem);
+        zoneDetails.classList.remove("hidden");
     } else {
-        message.textContent = "Zone not found. Please try again.";
+        message.textContent = "Sorry, zone not found. Please try again.";
     }
-}
-
-function displayZone(zone) {
-    zoneName.textContent = zone.name;
-    zoneTag.textContent = zone.tag;
-    zoneTag.style.backgroundColor = getTagColor(zone.tag);
-    zoneDescription.textContent = zone.description;
-    zoneImage.src = zone.image;
-    zoneImage.alt = zone.name;
-
-    zoneDetails.classList.remove("hidden");
 }
 
 searchBtn.addEventListener("click", searchZone);
 
-zoneInput.addEventListener("keypress", function (event) {
+zoneInput.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
         searchZone();
     }
-});
-</script>
+});</script>
 </body>
 </html>
