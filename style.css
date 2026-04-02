@@ -5,6 +5,7 @@
 /* ============================= */
 
 body{
+    background: #f7f1e8;
     font-family: 'Georgia', serif;
     margin:0;
     background:  #f7f3ea;
@@ -13,17 +14,13 @@ body{
 /* ============================= */
 /* HEADER */
 /* ============================= */
-
-
 .main-header{
-    background: linear-gradient(to right, #4b2e1e, #8b5e34);
-    color:white;
-
-    padding:8px 10px;   /* 🔥 smaller height */
-    font-size:18px;
-    letter-spacing:1px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);     /* cleaner like old design */
+    background: rgba(247,241,232,.93);
+    backdrop-filter: blur(12px);
+    color: #1c1410;
+    border-bottom: 2px solid rgba(184,151,90,.18);
 }
+
 
 /* ============================= */
 /* FOOTER */
@@ -43,42 +40,37 @@ body{
 
 .admin-welcome,
 .zones-section{
-    /*background: #f7f3ea;  SAME as page */
+    
     padding: 30px 35px;
     margin:20px;
     border-radius:12px;
-
-    /* ✨ THIS IS THE KEY */
-   /* border: 1.5px solid #d6bfa7;*/
 
    
 }
 
 
-/* ============================= */
-/* ZONE CARD */
-/* ============================= */
 .allzones-card{
-    width: 100%; /* FULL WIDTH */
-    padding: 25px;
-    border-radius: 16px;
-
-    background: linear-gradient(to bottom, #f7f3ea, #f3e0c7);
-
-    /* ✨ add this for better presence */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    width: 100%;
+    padding: 10px 0;
+    background: transparent;
 }
 
 .zone-card{
-    width: 95%;
-    padding: 20px;
-    margin: 10px 0;  /* better spacing */
-    border-radius: 12px;
+    width: 100%;
+    padding: 18px 20px;
+    margin: 14px 0;
+
+    background: white;
+    border: 1px solid rgba(184,151,90,.18);
+    border-radius: 16px;
+
+    box-shadow: 0 2px 12px rgba(0,0,0,.05);
+    transition: all .25s ease;
 }
 
 .zone-card:hover{
-    transform:translateY(-4px);
-    box-shadow:0 10px 20px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
 }
 
 /* ============================= */
@@ -144,12 +136,17 @@ button:disabled:hover{
 /* ============================= */
 
 .zone-tag{
-    color:white;
-    padding:6px 14px;
-    border-radius:20px;
-    font-size:13px;
-    font-weight:500;
-    box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    display: inline-flex;
+    align-items: center;
+
+    padding: 5px 14px;
+    border-radius: 100px;
+
+    font-size: 0.75rem;
+    font-weight: 500;
+
+    color: white;
+    letter-spacing: 0.3px;
 }
 
 /* TAG COLORS */
@@ -159,11 +156,13 @@ button:disabled:hover{
 }
 
 .normal{
-    background:#5cb85c;
+    background:#d4821a;
+    
 }
 
 .calm{
-    background:#5bc0de;
+    background:#2e8b57;
+    
 }
 
 .no-data{
@@ -270,11 +269,157 @@ p{
 
 /* LEFT (Hello Admin) */
 .admin-welcome{
+    background: transparent;
+    padding: 30px 0;
     width: 20%;
     min-width: 220px; /* prevents it from getting too tiny */
 }
 
 /* RIGHT (Zones) */
 .zones-section{
+    background: transparent;
     width: 80%;
+}
+
+.nav-title{
+    font-family:'Georgia', serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color: #503e35;
+;
+}
+
+.nav{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border-bottom: 1px solid rgba(184,151,90,.18);
+}
+
+.nav-logo{
+    flex-shrink:0;
+}
+
+.nav-title{
+    margin-right:auto; /* pushes everything right */
+}
+
+/* ===== Welcome Card (مثل الصفحة السياحية) ===== 
+.welcome-card{
+    width: 100%;
+    padding: 40px 30px;
+
+    
+    border-right: 1px solid rgba(184,151,90,.18);
+
+    background: linear-gradient(158deg, #efe6d4 0%, #f7f1e8 65%);
+    position: relative;
+    overflow: hidden;
+}*/
+
+/* ✨ الشبكة (نفس السياحية) */
+.welcome-card::before{
+    content:'';
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(rgba(184,151,90,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(184,151,90,.08) 1px, transparent 1px);
+
+    background-size: 40px 40px;
+    opacity: .5;
+}
+
+/* النص يكون فوق الخلفية */
+.welcome-card h1,
+.welcome-card p{
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== Layout ===== */
+.dashboard-layout{
+    display: flex;
+    align-items: stretch;
+}
+
+.welcome-card{
+     width: calc(100% + 30px);
+    height: 100%; /* مهم */
+
+    padding: 40px 30px;
+
+    border-right: 1px solid rgba(184,151,90,.18);
+
+    background: linear-gradient(158deg, #efe6d4 0%, #f7f1e8 65%);
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-welcome{
+     margin-top: -50px; /* أو جربي -30 حسب شكل الهيدر */
+     margin-left: -70px; /* يطلع لليسار */
+    padding-top: 50px;
+    width: 25%;
+    min-height: calc(100vh - 80px); /* تمتد بس تحت الهيدر */
+     
+}
+
+.dashboard-layout{
+    display: flex;
+    align-items: stretch;
+}
+
+.dashboard-layout{
+    min-height: calc(100vh - 120px);
+}
+
+
+/* النص فوق الخلفية */
+.welcome-content{
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== RIGHT SIDE ===== */
+.right-panel{
+    width: 72%;
+    padding: 40px;
+}
+/* ===== Notification ===== */
+.notification{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+
+    background: #1c1410;
+    color: rgb(0, 0, 0);
+
+    padding: 12px 18px;
+    border-radius: 10px;
+
+    font-size: 0.8rem;
+    font-weight: 500;
+
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+
+    z-index: 9999;
+}
+
+/* show */
+.notification.show{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* أنواع */
+.notification.success{ background: #ffffff; }
+.notification.edit{ background: #ffffff; }
+.notification.delete{ background: #ffffff; }
+
+.notification{
+    box-shadow: 0 10px 25px rgba(0,0,0,.15);
 }

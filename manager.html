@@ -3,37 +3,42 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Admin Dashboard</title>
+<title>Manager Dashboard</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <!-- HEADER -->
-<header class="main-header" id="header">
-
-    <div class="header-content">
-
+<nav class="nav">
+    <div class="nav-logo">
         <img src="images/logo.png" alt="Logo" class="logo">
-
-        <h2>AlUla Pulses - Admin Panel</h2>
-
     </div>
 
-</header>
+    <div class="nav-title">AlUla Pulses - Manager Panel</div>
+
+    <div class="nav-links"></div>
+</nav>
+
 
 
 <div class="container dashboard-layout">
 
     <!-- Welcome -->
     <section class="admin-welcome" id="welcome">
-        <h1>Hello Admin 👋</h1>
+
+    <div class="welcome-card">
+        <h1>Hello Manager 👋</h1>
+       
         <p>Manage zone activity tags.</p>
-    </section>
+    </div>
+
+</section>
 
     
     <section class="zones-section" id="zones">
         <h2>Zones</h2>
+        
     <div class="allzones-card">
         
       <div class="zone-card">
@@ -57,16 +62,16 @@
         <div class="zone-actions">
             <select id="add-zone1" onchange="addTag('zone1', this)">
                 <option value="">Add Tag</option>
-                <option>Busy</option>
-                <option>Normal</option>
-                <option>Calm</option>
+                <option>Crowded</option>
+                <option>Moderate</option>
+                <option>Clear</option>
             </select>
 
             <select id="edit-zone1" onchange="editTag('zone1', this)" disabled>
                 <option value="">Edit Tag</option>
-                <option>Busy</option>
-                <option>Normal</option>
-                <option>Calm</option>
+                <option>Crowded</option>
+                <option>Moderate</option>
+                <option>Clear</option>
             </select>
 
             <button onclick="deleteTag('zone1')" disabled id="delete-zone1">
@@ -98,16 +103,16 @@
         <div class="zone-actions">
             <select id="add-zone2" onchange="addTag('zone2', this)">
                 <option value="">Add Tag</option>
-                <option>Busy</option>
-                <option>Normal</option>
-                <option>Calm</option>
+                <option>Crowded</option>
+                <option>Moderate</option>
+                <option>Clear</option>
             </select>
 
             <select id="edit-zone2" onchange="editTag('zone2', this)" disabled>
                 <option value="">Edit Tag</option>
-                <option>Busy</option>
-                <option>Normal</option>
-                <option>Calm</option>
+                <option>Crowded</option>
+                <option>Moderate</option>
+                <option>Clear</option>
             </select>
 
             <button onclick="deleteTag('zone2')" disabled id="delete-zone2">
@@ -138,16 +143,16 @@
         <div class="zone-actions">
             <select id="add-zone3" onchange="addTag('zone3', this)">
                 <option value="">Add Tag</option>
-                <option>Busy</option>
-                <option>Normal</option>
-                <option>Calm</option>
+                <option>Crowded</option>
+                <option>Moderate</option>
+                <option>Clear</option>
             </select>
 
             <select id="edit-zone3" onchange="editTag('zone3', this)" disabled>
                 <option value="">Edit Tag</option>
-                <option>Busy</option>
-                <option>Normal</option>
-                <option>Calm</option>
+                <option>Crowded</option>
+                <option>Moderate</option>
+                <option>Clear</option>
             </select>
 
             <button onclick="deleteTag('zone3')" disabled id="delete-zone3">
@@ -178,16 +183,16 @@
         <div class="zone-actions">
             <select id="add-zone4" onchange="addTag('zone4', this)">
                 <option value="">Add Tag</option>
-                <option>Busy</option>
-                <option>Normal</option>
-                <option>Calm</option>
+                <option>Crowded</option>
+                <option>Moderate</option>
+                <option>Clear</option>
             </select>
 
             <select id="edit-zone4" onchange="editTag('zone4', this)" disabled>
                 <option value="">Edit Tag</option>
-                <option>Busy</option>
-                <option>Normal</option>
-                <option>Calm</option>
+                <option>Crowded</option>
+                <option>Moderate</option>
+                <option>Clear</option>
             </select>
 
             <button onclick="deleteTag('zone4')" disabled id="delete-zone4">
@@ -220,16 +225,16 @@
         <div class="zone-actions">
             <select id="add-zone5" onchange="addTag('zone5', this)">
                 <option value="">Add Tag</option>
-                <option>Busy</option>
-                <option>Normal</option>
-                <option>Calm</option>
+                <option>Crowded</option>
+                <option>Moderate</option>
+                <option>Clear</option>
             </select>
 
             <select id="edit-zone5" onchange="editTag('zone5', this)" disabled>
                 <option value="">Edit Tag</option>
-                <option>Busy</option>
-                <option>Normal</option>
-                <option>Calm</option>
+                <option>Crowded</option>
+                <option>Moderate</option>
+                <option>Clear</option>
             </select>
 
             <button onclick="deleteTag('zone5')" disabled id="delete-zone5">
@@ -279,6 +284,7 @@ function addTag(id, select){
 
     tag.innerText = select.value;
     updateTagStyle(tag, select.value);
+    showNotification("Tag added successfully ✅", "success");
 
     // disable add
     select.disabled = true;
@@ -297,9 +303,10 @@ function editTag(id, select){
     if(select.value === "") return;
 
     let tag = document.getElementById("tag-" + id);
-
+showNotification("Tag updated ✏️", "edit");
     tag.innerText = select.value;
     updateTagStyle(tag, select.value);
+    
 
     // reset dropdown
     select.value = "";
@@ -312,7 +319,7 @@ function deleteTag(id){
 
     tag.innerText = "No Data";
     tag.className = "zone-tag no-data";
-
+showNotification("Tag removed ❌", "delete");
     // enable add again
     let add = document.getElementById("add-" + id);
     add.disabled = false;
@@ -333,19 +340,30 @@ function updateTagStyle(tag, value){
 
     tag.className = "zone-tag";
 
-    if(value === "Busy"){
-        tag.classList.add("busy");
-    }
-    else if(value === "Normal"){
-        tag.classList.add("normal");
-    }
-    else if(value === "Calm"){
-        tag.classList.add("calm");
-    }
+ if(value === "Crowded"){
+    tag.classList.add("busy");
+}
+else if(value === "Moderate"){
+    tag.classList.add("normal");
+}
+else if(value === "Clear"){
+    tag.classList.add("calm");
+}
 }
 
+function showNotification(message, type){
+
+    const notif = document.getElementById("notification");
+
+    notif.innerText = message;
+    notif.className = "notification show " + type;
+
+    setTimeout(() => {
+        notif.classList.remove("show");
+    }, 2500);
+}
 
 </script>
-
+<div id="notification" class="notification"></div>
 </body>
 </html>
