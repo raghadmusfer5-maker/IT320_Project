@@ -358,7 +358,8 @@ p{
 }
 
 .admin-welcome{
-     margin-top: -50px; /* أو جربي -30 حسب شكل الهيدر */
+    z-index: -1;
+     margin-top: -160px; /* أو جربي -30 حسب شكل الهيدر */
      margin-left: -70px; /* يطلع لليسار */
     padding-top: 50px;
     width: 25%;
@@ -422,4 +423,33 @@ p{
 
 .notification{
     box-shadow: 0 10px 25px rgba(0,0,0,.15);
+}
+
+.exit-btn {
+    margin-left: auto;
+    background: rgba(255,255,255,.88);
+    border: 1px solid var(--border);
+    color: #453831 ;
+
+    border-radius: 999px;
+    padding: 12px 20px;
+
+    font-size: 1rem; /* أكبر شوي */
+    font-weight: 500;
+
+    font-family: 'DM Sans', sans-serif; /* نفس Back */
+    
+    text-decoration: none; /* يشيل الخط */
+    
+    cursor: pointer;
+    transition: .2s ease;
+
+    display: inline-block; /* يخليه نفس شكل الزر */
+}
+
+
+.exit-btn:hover {
+   transform: translateY(-1px);
+      border-color: rgba(184,151,90,.35);
+      box-shadow: 0 8px 18px rgba(0,0,0,.06);
 }
