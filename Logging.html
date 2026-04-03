@@ -473,7 +473,7 @@
         <div class="stage-box">
           <h3 class="card-title">Create Account</h3>
           <p class="muted">Register as a tourist by entering your username, email, and password.</p>
-          <form class="stack" onsubmit="event.preventDefault();showStep('welcomeCard');">
+          <form class="stack" onsubmit="handleSignup(event)">
             <div>
               <label>Username</label>
               <input class="input" type="text" required />
@@ -542,7 +542,11 @@
     const loginTitle = document.getElementById('loginTitle')
     let currentStep = 'welcomeCard'
     let selectedRole = ''
-
+    
+function handleSignup(event) {
+  event.preventDefault();
+  window.location.href = "Tourist.html";
+}
     function showStep(id) {
       steps.forEach(step => {
         document.getElementById(step).classList.remove('active')
