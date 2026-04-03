@@ -56,6 +56,7 @@ The goal of this platform is to simplify complex urban data and improve awarenes
 - Deyma Alseghayr
 - Sondos aldugaim
 
+See full details here: [AUTHORS.md](AUTHORS.md)
 ---
 
 ## 📌 Notes
