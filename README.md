@@ -52,7 +52,7 @@ The goal of this platform is to simplify complex urban data and improve awarenes
 ## 👩‍💻 Team Members
 
 - Dana A losaimi
-- Raghad Alghtani
+- Raghad Alqahtani
 - Deyma Alseghayr
 - Sondos aldugaim
 
