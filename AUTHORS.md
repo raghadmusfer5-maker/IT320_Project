@@ -8,12 +8,12 @@
 
 ---
 
-## Deyma Alseghayr
+## Deyma Alseghayir
 **Role:** Developer 
 **Contributions:**
 - Assisted in UI design  
-- Helped structure pages  
-- Worked on styling and layout  
+- Created the registration pages
+- Worked on System Architecture   
 
 ---
 
