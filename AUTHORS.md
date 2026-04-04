@@ -29,8 +29,8 @@
 ## Sondos Aldughaim
 **Role:** Developer  
 **Contributions:**
-- Prepared content and descriptions  
-- Tested system functionality  
+- Developed the tourist page and map interface.
+- Implemented interactive map features (zones, tags, colors).
 - Ensured usability and correctness  
 
 ---
