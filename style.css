@@ -453,3 +453,8 @@ p{
       border-color: rgba(184,151,90,.35);
       box-shadow: 0 8px 18px rgba(0,0,0,.06);
 }
+
+.zone-header p{
+    font-family: 'Georgia', serif;
+    color: #453831 ;
+}
