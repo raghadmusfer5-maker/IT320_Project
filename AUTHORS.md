@@ -8,12 +8,12 @@
 
 ---
 
-## Deyma Alseghayr
+## Deyma Alseghayir
 **Role:** Developer 
 **Contributions:**
 - Assisted in UI design  
-- Helped structure pages  
-- Worked on styling and layout  
+- Created the registration pages
+- Worked on System Architecture   
 
 ---
 
@@ -29,8 +29,8 @@
 ## Sondos Aldughaim
 **Role:** Developer  
 **Contributions:**
-- Prepared content and descriptions  
-- Tested system functionality  
+- Developed the tourist page and map interface.
+- Implemented interactive map features (zones, tags, colors).
 - Ensured usability and correctness  
 
 ---

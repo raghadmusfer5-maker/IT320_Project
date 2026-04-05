@@ -54,7 +54,7 @@ The goal of this platform is to simplify complex urban data and improve awarenes
 - Dana A losaimi
 - Raghad Alqahtani
 - Deyma Alseghayr
-- Sondos aldugaim
+- Sondos aldughaim
 
 See full details here: [AUTHORS.md](AUTHORS.md)
 ---
