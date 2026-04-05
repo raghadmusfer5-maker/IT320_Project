@@ -431,6 +431,16 @@
     padding:12px;
     margin-top:30px;
 }
+
+.input:focus {
+  outline: none;
+  border-color: #b8975a;
+  box-shadow: 0 0 0 2px rgba(184,151,90,.15);
+}
+
+.error-message {
+  transition: 0.2s;
+}
   </style>
 </head>
 <body>
@@ -480,24 +490,27 @@
         <div class="stage-box">
           <h3 class="card-title">Create Account</h3>
           <p class="muted">Register as a tourist by entering your username, email, and password.</p>
-          <form class="stack" onsubmit="handleSignup(event)">
-            <div>
-              <label>Username</label>
-              <input class="input" type="text" required />
-            </div>
-            <div>
-              <label>Email</label>
-              <input class="input" type="email" required />
-            </div>
-            <div>
-              <label>Password</label>
-              <input class="input" type="password" required />
-            </div>
-            <div class="form-actions">
-              <button type="button" class="btn" onclick="showStep('welcomeCard')">Cancel</button>
-              <button type="submit" class="btn btn-primary">Confirm</button>
-            </div>
-          </form>
+          <form id="signupForm" class="stack">
+  <div>
+    <label>Username</label>
+    <input id="signupUsername" class="input" type="text" required />
+  </div>
+
+  <div>
+    <label>Email</label>
+    <input id="signupEmail" class="input" type="email" required />
+  </div>
+
+  <div>
+    <label>Password</label>
+    <input id="signupPassword" class="input" type="password" required />
+  </div>
+
+  <div class="form-actions">
+    <button type="button" class="btn" onclick="showStep('welcomeCard')">Cancel</button>
+    <button type="submit" class="btn btn-primary">Confirm</button>
+  </div>
+</form>
         </div>
       </div>
 
@@ -524,20 +537,22 @@
       <div class="flow-card-active" id="loginCard">
         <div class="stage-box">
           <h3 class="card-title" id="loginTitle">Please enter your details</h3>
-          <form class="stack" onsubmit="handleLogin(event)">
-            <div>
-              <label>Username</label>
-              <input class="input" type="text" required />
-            </div>
-            <div>
-              <label>Password</label>
-              <input class="input" type="password" required />
-            </div>
-            <div class="form-actions">
-              <button type="button" class="btn" onclick="showStep('welcomeCard')">Cancel</button>
-              <button type="submit" class="btn btn-primary">Confirm</button>
-            </div>
-          </form>
+          <form id="loginForm" class="stack">
+  <div>
+    <label>Username</label>
+    <input id="loginUsername" class="input" type="text" required />
+  </div>
+
+  <div>
+    <label>Password</label>
+    <input id="loginPassword" class="input" type="password" required />
+  </div>
+
+  <div class="form-actions">
+    <button type="button" class="btn" onclick="showStep('welcomeCard')">Cancel</button>
+    <button type="submit" class="btn btn-primary">Confirm</button>
+  </div>
+</form>
         </div>
       </div>
     </div>
@@ -549,11 +564,137 @@
     const loginTitle = document.getElementById('loginTitle')
     let currentStep = 'welcomeCard'
     let selectedRole = ''
-    
-function handleSignup(event) {
-  event.preventDefault();
-  window.location.href = "Tourist.html";
+    document.addEventListener("DOMContentLoaded", () => {
+
+  function createError(input) {
+    const div = document.createElement("div");
+    div.className = "error-message";
+    div.style.color = "#d4a5a5";
+    div.style.fontSize = "0.8rem";
+    div.style.marginTop = "4px";
+    div.style.display = "none";
+    input.parentElement.appendChild(div);
+    return div;
+  }
+
+  function showError(input, errorDiv, msg) {
+    errorDiv.textContent = msg;
+    errorDiv.style.display = "block";
+    input.style.borderColor = "#d4a5a5";
+  }
+
+  function hideError(input, errorDiv) {
+    errorDiv.style.display = "none";
+    input.style.borderColor = "#e8d5c4";
+  }
+
+  function validateUsername(username) {
+    if (username.trim().length < 3) return "At least 3 characters";
+    return null;
+  }
+
+  function validateEmail(email) {
+    if (!email.includes("@") || !email.includes(".")) {
+      return "Invalid email";
+    }
+    return null;
+  }
+
+  function validatePassword(password) {
+  if (password.length < 8) return "Min 8 characters";
+  if (!/[A-Z]/.test(password)) return "Need uppercase";
+  if (!/[a-z]/.test(password)) return "Need lowercase";
+  if (!/[0-9]/.test(password)) return "Need number";
+  if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) return "Need special character"; 
+  return null;
 }
+
+  // ================= SIGNUP =================
+  const signupForm = document.getElementById("signupForm");
+
+  if (signupForm) {
+    const username = document.getElementById("signupUsername");
+    const email = document.getElementById("signupEmail");
+    const password = document.getElementById("signupPassword");
+
+    const userErr = createError(username);
+    const emailErr = createError(email);
+    const passErr = createError(password);
+
+    signupForm.addEventListener("submit", (e) => {
+      e.preventDefault(); 
+
+      let hasError = false;
+
+      const u = validateUsername(username.value);
+      const em = validateEmail(email.value);
+      const p = validatePassword(password.value);
+
+      if (u) { showError(username, userErr, u); hasError = true; }
+      else hideError(username, userErr);
+
+      if (em) { showError(email, emailErr, em); hasError = true; }
+      else hideError(email, emailErr);
+
+      if (p) { showError(password, passErr, p); hasError = true; }
+      else hideError(password, passErr);
+
+      if (hasError) {
+  e.preventDefault();
+  return; }
+
+      // نجاح التسجيل
+      window.location.href = 'Tourist.html';
+    });
+  }
+
+  // ================= LOGIN =================
+  const loginForm = document.getElementById("loginForm");
+
+
+let hasError = false;
+  if (loginForm) {
+    const username = document.getElementById("loginUsername");
+    const password = document.getElementById("loginPassword");
+
+    const userErr = createError(username);
+    const passErr = createError(password);
+
+loginForm.addEventListener("submit", (e) => {
+e.preventDefault(); 
+  let hasError = false;
+
+  const u = validateUsername(username.value);
+  const p = validatePassword(password.value);
+
+  if (u) { showError(username, userErr, u); hasError = true; }
+  else hideError(username, userErr);
+
+  if (p) { showError(password, passErr, p); hasError = true; }
+  else hideError(password, passErr);
+
+  // 🔥 تحقق من اختيار الدور
+  if (!selectedRole) {
+    alert("Please choose Tourist or Manager first");
+    hasError = true;
+  }
+
+  if (hasError) {
+    e.preventDefault();
+    return;
+  }
+
+  // هنا فقط يصير التحويل
+  if (selectedRole === 'Manager') {
+    window.location.href = 'manager.html';
+  } else {
+    window.location.href = 'Tourist.html';
+  }
+});
+  }
+
+});
+
     function showStep(id) {
       steps.forEach(step => {
         document.getElementById(step).classList.remove('active')
@@ -569,16 +710,7 @@ function handleSignup(event) {
       showStep('loginCard')
     }
 
-    function handleLogin(event) {
-      event.preventDefault()
 
-      if (selectedRole === 'Manager') {
-        window.location.href = 'manager.html'
-        return
-      }
-
-      window.location.href = 'Tourist.html'
-    }
 
     function goBack() {
       if (currentStep === 'loginCard') {
